@@ -4,10 +4,35 @@
 
 class Usuario {
     public function __construct(
-        public string $nome = "", 
-        public string $email = "", 
-        public string $senha = "")
+        private string $nome = "", 
+        private string $email = "", 
+        private string $senha = "")
     {}
+
+    // Encapsulamento
+    public function getNome() {
+        return $this->nome;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function getSenha() {
+        return $this->senha;
+    }
+
+    public function setNome($nome) {
+        $this->nome = $nome;
+    }
+
+    public function setEmail($email) {
+        $this->email = $email;
+    }
+
+    public function setSenha($senha) {
+        $this->senha = $senha;
+    }
 }
 
 ?>

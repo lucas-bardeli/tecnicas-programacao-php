@@ -18,11 +18,11 @@ echo "<br>";
 var_dump($usuario3);
 echo "</pre>";
 
-echo "<h1>Olá, $usuario1->nome</h1>";
-echo "<h2>$usuario1->email</h2>";
-echo "<h2>$usuario1->senha</h2>";
+echo "<h1>Olá, {$usuario1->getNome()}</h1>";
+echo "<h2>Email: {$usuario1->getEmail()}</h2>";
+echo "<h2>Senha: {$usuario1->getSenha()}</h2>";
 
-$usuario1->nome = "Maria da Silva";
-echo "<h1>Olá, $usuario1->nome</h1>";
+$usuario1->setNome("Maria da Silva");
+echo "<h1>Olá, {$usuario1->getNome()}</h1>";
 
 ?>
