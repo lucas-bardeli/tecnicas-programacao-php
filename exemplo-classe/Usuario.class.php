@@ -1,13 +1,13 @@
 <?php
 
-// .class no nome do arquivo para diferenciar as classes
+// .class no nome do arquivo para diferenciar as classes e nome em maíusculo por convenção
 
 class Usuario {
     public function __construct(
         private string $nome = "", 
         private string $email = "", 
-        private string $senha = "")
-    {}
+        private string $senha = ""
+    ){}
 
     // Encapsulamento
     public function getNome() {
