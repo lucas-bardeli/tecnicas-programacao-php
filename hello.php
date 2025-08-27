@@ -10,10 +10,10 @@ echo "Idade: $idade\n<br>";
 echo "Altura: $altura\n<br>";
 
 if ($solteiro) {
-    echo "Estado civil: Solteiro";
+  echo "Estado civil: Solteiro";
 }
 else {
-    echo "Estado civil: Compromissado";
+  echo "Estado civil: Compromissado";
 }
 
 ?>
