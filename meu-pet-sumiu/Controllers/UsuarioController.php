@@ -1,5 +1,7 @@
 <?php
 
+require_once "Models/Conexao.php";
+require_once "Models/UsuarioDAO.php";
 require_once "Models/Usuarios.php";
 
 class UsuarioController {
@@ -29,6 +31,15 @@ class UsuarioController {
       else {
         // verificar se já não tem um usuário com esse email cadastrado
         $usuario = new Usuarios(email: $_POST["email"]);
+        $usuarioDAO = new UsuarioDAO();
+        $retorno = $usuarioDAO->valida_email($usuario);
+
+        if (is_array($retorno)) {
+          if (count($retorno) > 0) {
+            $msg[1] = "Esse email já está cadastrado!";
+            $erro = true;
+          }
+        }
       }
 
       if (empty($_POST["senha"])) {
@@ -42,8 +53,10 @@ class UsuarioController {
       }
 
       if (!$erro) {
+        $usuario = new Usuarios(0, $_POST["nome"], $_POST["email"], password_hash($_POST["senha"], PASSWORD_DEFAULT), $_POST["telefone"]);
         // cadastrar no banco de dados
-        $usuario = new Usuarios(0, $_POST["nome"], $_POST["email"], $_POST["senha"], $_POST["telefone"]);
+        $usuarioDAO = new UsuarioDAO();
+        $retorno = $usuarioDAO->inserir($usuario);
       }
     }
 
