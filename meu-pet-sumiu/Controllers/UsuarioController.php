@@ -6,12 +6,44 @@ require_once "Models/Usuarios.php";
 
 class UsuarioController {
   public function login() {
-    
-    // require views formulário
+    $msg = array("", "", "");
+    $erro = false;
+
     if ($_POST) {
       // verificar os dados
+      if (empty($_POST["email"])) {
+        $msg[0] = "Preencha o email.";
+        $erro = true;
+      }
+      if (empty($_POST["senha"])) {
+        $msg[1] = "Preencha a senha.";
+        $erro = true;
+      }
+
       // verificar no banco de dados se existe esse usuário
+      if (!$erro) {
+        $usuario = new Usuarios(email: $_POST["email"]);
+        $usuarioDAO = new UsuarioDAO();
+        $retorno = $usuarioDAO->login($usuario);
+
+        // verificar se a senha corresponde
+        if (is_array($retorno)) {
+          if (count($retorno) > 0) {
+            if (password_verify($_POST["senha"], $retorno[0]->senha)) {
+              $msg[2] = "Login com sucesso!";
+            }
+            else {
+              $msg[2] = "Credenciais inválidas!";
+            }
+          }
+          else {
+            $msg[2] = "Credenciais inválidas!";
+          }
+        }
+      }
     }
+    // require views formulário
+    require_once "Views/login.php";
   }
 
   public function inserir() {

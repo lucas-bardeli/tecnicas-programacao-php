@@ -24,7 +24,7 @@
             <a class="nav-link" href="index.php?controle=UsuarioController&metodo=inserir">Criar conta</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="index.php?controle=UsuarioController&metodo=login">Login</a>
           </li>
         </ul>
       </div>

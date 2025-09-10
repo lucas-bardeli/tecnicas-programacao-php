@@ -29,8 +29,21 @@ class UsuarioDAO extends Conexao {
     }
   }
 
-  public function login() {
+  public function login($usuario) {
+    $sql = "SELECT id_usuario, email, senha FROM usuarios WHERE email=?";
 
+    try {
+      $smt = $this->db->prepare($sql);
+      $smt->bindValue(1, $usuario->getEmail());
+      $smt->execute();
+      $this->db = null;
+
+      return $smt->fetchAll(PDO::FETCH_OBJ);
+    }
+    catch (PDOException $e) {
+      $this->db = null;
+      return "Erro ao validar email!";
+    }
   }
 
   public function valida_email($usuario) {
